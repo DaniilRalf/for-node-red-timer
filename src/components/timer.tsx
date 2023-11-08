@@ -19,17 +19,18 @@ const Timer = () => {
 
     const [timerConf, setTimerConf] = useState<TimerConfInterface>({} as TimerConfInterface)
 
-    useEffect(() => {
+    useEffect((): void => {
         setDataOnInit()
     }, [])
 
     /** set data when initializing the component */
-    const setDataOnInit = () => {
+    const setDataOnInit = (): void => {
+        mockData.isOpen = IS_OPEN_COLLAPSE
         setTimerConf(mockData)
     }
 
     /** set data when open collapse */
-    const setDataOnOpenCollapse = () => {
+    const setDataOnOpenCollapse = (): void => {
         const newTimerConf = JSON.parse(JSON.stringify(timerConf))
         newTimerConf.isOpen = !newTimerConf.isOpen
         setTimerConf(newTimerConf)
