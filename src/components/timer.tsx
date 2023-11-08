@@ -1,14 +1,39 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Collapse} from "antd";
 
 interface TimerConfInterface {
-    isOpen: boolean
+    isOpen: boolean,
+    nodeName: string,
+}
+
+const IS_OPEN_COLLAPSE = true
+
+// TODO: мок дата, она будет приходить из пропса
+const mockData: TimerConfInterface = {
+    isOpen: true,
+    nodeName: ''
 }
 
 /** timer-delay component */
 const Timer = () => {
 
     const [timerConf, setTimerConf] = useState<TimerConfInterface>({} as TimerConfInterface)
+
+    useEffect(() => {
+        setDataOnInit()
+    }, [])
+
+    /** set data when initializing the component */
+    const setDataOnInit = () => {
+        setTimerConf(mockData)
+    }
+
+    /** set data when open collapse */
+    const setDataOnOpenCollapse = () => {
+        const newTimerConf = JSON.parse(JSON.stringify(timerConf))
+        newTimerConf.isOpen = !newTimerConf.isOpen
+        setTimerConf(newTimerConf)
+    }
 
 
 
@@ -18,12 +43,28 @@ const Timer = () => {
                 size="small"
                 expandIconPosition={'end'}
                 style={styleComponents.collapseBlock}
+                /** default open or close collapse*/
+                activeKey={timerConf.isOpen ? ['conf-default'] : ['']}
+                onChange={setDataOnOpenCollapse}
                 items={[{
                     key: 'conf-default',
                     // TODO: add translate
                     label: 'Настройки',
                     children:
-                        <p>asdasd</p>
+                        <>
+
+
+                            <div style={styleComponents.childBlock.nameBlock.main}>
+                                {/*TODO: add translate*/}
+                                <div style={styleComponents.childBlock.nameBlock.title}>Имя</div>
+                                <div style={styleComponents.childBlock.nameBlock.input}></div>
+                            </div>
+
+
+                            <div style={styleComponents.collapseBlock}></div>
+
+
+                        </>
                 }]}
             />
             <style>{styleAntdCustom}</style>
@@ -39,11 +80,19 @@ const styleComponents = {
         width: '100%'
     },
     childBlock : {
-
+        nameBlock: {
+            main: {
+                display: 'flex',
+                justifyContent: 'space-between'
+            },
+            title: {},
+            input: {},
+        },
+        timerBlock: {},
     }
 }
 /** styles for timer-delay ANTD library */
 const styleAntdCustom = `
-    .ant-collapse-header{display: flex; justify-content: end;}
-    .ant-collapse-header-text{flex: none;}
+    .ant-collapse-header{display: flex!important; justify-content: end!important;}
+    .ant-collapse-header-text{flex: none!important; margin-inline-end: 0px!important;}
 `
