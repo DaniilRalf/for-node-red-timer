@@ -4,7 +4,17 @@ export interface TimerConfInterface {
     delay: {
         isDelay: boolean,
         delayValue: number | null
+    },
+    repeat: {
+        typeRepeat: RepeatEnum
     }
+}
+
+export enum RepeatEnum {
+    None = 'none',
+    Interval = 'interval',
+    IntervalInGap = 'interval_in_gap',
+    ConcreteTime = 'concrete_time',
 }
 
 /** PROPS INTERFACE============================== */
@@ -13,3 +23,4 @@ export type PropsNodeNameType = {
     setTimerConf: any
 }
 export type PropsDelayType = PropsNodeNameType
+export type PropsRepeatType = PropsNodeNameType

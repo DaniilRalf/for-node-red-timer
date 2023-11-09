@@ -1,9 +1,10 @@
 import React, {useEffect, useMemo, useState} from 'react'
 import {Collapse} from "antd"
 import {styleAntdCustom, styleComponents} from "./assets/styles";
-import NameSettings from "./components/name-settings";
-import {PropsDelayType, PropsNodeNameType, TimerConfInterface} from "./assets/types";
+import NameSetting from "./components/name-setting";
+import {PropsDelayType, PropsNodeNameType, RepeatEnum, TimerConfInterface} from "./assets/types";
 import DelaySetting from "./components/delay-setting";
+import RepeatSetting from "./components/repeat-setting";
 
 const IS_OPEN_COLLAPSE = true
 
@@ -14,6 +15,9 @@ const mockData: TimerConfInterface = {
     delay: {
         isDelay: false,
         delayValue: null,
+    },
+    repeat: {
+        typeRepeat: RepeatEnum.None
     }
 }
 
@@ -48,6 +52,10 @@ const Timer = () => {
         {timerConf, setTimerConf}
     ), [timerConf])
 
+    const propsRepeatSetting = useMemo<PropsDelayType>(() => (
+        {timerConf, setTimerConf}
+    ), [timerConf])
+
 
 
 
@@ -66,8 +74,9 @@ const Timer = () => {
                     label: 'Настройки',
                     children:
                         <>
-                            <NameSettings {...propsNameSetting} />
+                            <NameSetting {...propsNameSetting} />
                             <DelaySetting {...propsDelaySetting} />
+                            <RepeatSetting {...propsRepeatSetting} />
                         </>
                 }]}
             />

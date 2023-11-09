@@ -5,7 +5,7 @@ import {Input} from "antd";
 import {PropsNodeNameType} from "../assets/types";
 
 
-const NameSettings = ({timerConf, setTimerConf}: PropsNodeNameType) => {
+const NameSetting = ({timerConf, setTimerConf}: PropsNodeNameType) => {
 
     /** set data NODE_NAME */
     const setDataNodeName = (data: string): void => {
@@ -31,4 +31,4 @@ const NameSettings = ({timerConf, setTimerConf}: PropsNodeNameType) => {
         </div>
     )
 }
-export default NameSettings
+export default NameSetting

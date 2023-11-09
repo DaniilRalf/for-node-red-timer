@@ -16,6 +16,12 @@ export const styleComponents = {
             checkbox: {marginRight: '7px', transform: 'scale(1.3)'},
             input: {width: '80px'}
         },
+        timerRepeatBlock: {
+            main: {display: 'flex', justifyContent: 'space-between', marginBottom: '15px'},
+            title: {display: 'flex', alignItems: 'center'},
+            icon: {marginRight: '5px'},
+            select: {width: '250px'},
+        }
     }
 }
 /** styles for timer-delay ANTD library */
