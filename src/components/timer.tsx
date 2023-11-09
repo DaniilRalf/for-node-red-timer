@@ -1,19 +1,20 @@
-import React, {useEffect, useState} from 'react'
-import {Collapse, Input} from "antd"
-import {TagFilled} from "@ant-design/icons";
+import React, {useEffect, useMemo, useState} from 'react'
+import {Collapse} from "antd"
 import {styleAntdCustom, styleComponents} from "./assets/styles";
-
-interface TimerConfInterface {
-    isOpen: boolean,
-    nodeName: string,
-}
+import NameSettings from "./components/name-settings";
+import {PropsDelayType, PropsNodeNameType, TimerConfInterface} from "./assets/types";
+import DelaySetting from "./components/delay-setting";
 
 const IS_OPEN_COLLAPSE = true
 
 // TODO: мок дата, она будет приходить из пропса
 const mockData: TimerConfInterface = {
     isOpen: true,
-    nodeName: ''
+    nodeName: '',
+    delay: {
+        isDelay: false,
+        delayValue: null,
+    }
 }
 
 /** timer-delay component */
@@ -27,6 +28,7 @@ const Timer = () => {
 
     /** set data when initializing the component */
     const setDataOnInit = (): void => {
+        // TODO: засунуть в переменную timerConf данные из пропсов
         mockData.isOpen = IS_OPEN_COLLAPSE
         setTimerConf(mockData)
     }
@@ -38,12 +40,14 @@ const Timer = () => {
         setTimerConf(newTimerConf)
     }
 
-    /** set data NODE_NAME */
-    const setDataNodeName = (data: string): void => {
-        const newTimerConf = JSON.parse(JSON.stringify(timerConf))
-        newTimerConf.nodeName = data
-        setTimerConf(newTimerConf)
-    }
+    const propsNameSetting = useMemo<PropsNodeNameType>(() => (
+        {timerConf, setTimerConf}
+    ), [timerConf])
+
+    const propsDelaySetting = useMemo<PropsDelayType>(() => (
+        {timerConf, setTimerConf}
+    ), [timerConf])
+
 
 
 
@@ -53,7 +57,7 @@ const Timer = () => {
                 size="small"
                 expandIconPosition={'end'}
                 style={styleComponents.collapseBlock}
-                /** default open or close collapse*/
+                /** default open or close collapse */
                 activeKey={timerConf.isOpen ? ['conf-default'] : ['']}
                 onChange={setDataOnOpenCollapse}
                 items={[{
@@ -62,28 +66,12 @@ const Timer = () => {
                     label: 'Настройки',
                     children:
                         <>
-
-                            {/** NAME setting */}
-                            <div style={styleComponents.childBlock.nameBlock.main}>
-                                <div style={styleComponents.childBlock.nameBlock.title}>
-                                    <p style={styleComponents.childBlock.nameBlock.icon}><TagFilled /></p>
-                                    {/*TODO: add translate*/}
-                                    <p>Имя</p>
-                                </div>
-                                {/*TODO: add translate*/}
-                                <Input placeholder="Имя"
-                                       style={styleComponents.childBlock.nameBlock.input}
-                                       value={timerConf.nodeName}
-                                       onChange={(el) => setDataNodeName(el.target.value)}
-                                />
-                            </div>
-
-                            {/** TIMER setting */}
-                            <div style={styleComponents.collapseBlock}></div>
-
+                            <NameSettings {...propsNameSetting} />
+                            <DelaySetting {...propsDelaySetting} />
                         </>
                 }]}
             />
+            {/*<div className="" onClick={() => console.log(timerConf)}>asdasd</div>*/}
             <style>{styleAntdCustom}</style>
         </div>
     )
