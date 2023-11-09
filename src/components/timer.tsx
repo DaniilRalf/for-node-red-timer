@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import {Collapse} from "antd";
+import {Collapse, Input} from "antd"
+import {TagFilled} from "@ant-design/icons";
+import {styleAntdCustom, styleComponents} from "./assets/styles";
 
 interface TimerConfInterface {
     isOpen: boolean,
@@ -29,10 +31,17 @@ const Timer = () => {
         setTimerConf(mockData)
     }
 
-    /** set data when open collapse */
+    /** set data when open collapse IS_OPEN */
     const setDataOnOpenCollapse = (): void => {
         const newTimerConf = JSON.parse(JSON.stringify(timerConf))
         newTimerConf.isOpen = !newTimerConf.isOpen
+        setTimerConf(newTimerConf)
+    }
+
+    /** set data NODE_NAME */
+    const setDataNodeName = (data: string): void => {
+        const newTimerConf = JSON.parse(JSON.stringify(timerConf))
+        newTimerConf.nodeName = data
         setTimerConf(newTimerConf)
     }
 
@@ -54,16 +63,23 @@ const Timer = () => {
                     children:
                         <>
 
-
+                            {/** NAME setting */}
                             <div style={styleComponents.childBlock.nameBlock.main}>
+                                <div style={styleComponents.childBlock.nameBlock.title}>
+                                    <p style={styleComponents.childBlock.nameBlock.icon}><TagFilled /></p>
+                                    {/*TODO: add translate*/}
+                                    <p>Имя</p>
+                                </div>
                                 {/*TODO: add translate*/}
-                                <div style={styleComponents.childBlock.nameBlock.title}>Имя</div>
-                                <div style={styleComponents.childBlock.nameBlock.input}></div>
+                                <Input placeholder="Имя"
+                                       style={styleComponents.childBlock.nameBlock.input}
+                                       value={timerConf.nodeName}
+                                       onChange={(el) => setDataNodeName(el.target.value)}
+                                />
                             </div>
 
-
+                            {/** TIMER setting */}
                             <div style={styleComponents.collapseBlock}></div>
-
 
                         </>
                 }]}
@@ -73,27 +89,3 @@ const Timer = () => {
     )
 }
 export default Timer
-
-
-/** styles for timer-delay component */
-const styleComponents = {
-    collapseBlock: {
-        width: '100%'
-    },
-    childBlock : {
-        nameBlock: {
-            main: {
-                display: 'flex',
-                justifyContent: 'space-between'
-            },
-            title: {},
-            input: {},
-        },
-        timerBlock: {},
-    }
-}
-/** styles for timer-delay ANTD library */
-const styleAntdCustom = `
-    .ant-collapse-header{display: flex!important; justify-content: end!important;}
-    .ant-collapse-header-text{flex: none!important; margin-inline-end: 0px!important;}
-`
