@@ -25,7 +25,7 @@ const NameSetting = ({timerConf, setTimerConf}: PropsNodeNameType) => {
             {/*TODO: add translate*/}
             <Input placeholder="Имя"
                    style={styleComponents.childBlock.nameBlock.input}
-                   value={timerConf.nodeName}
+                   value={timerConf.nodeName ?? ''}
                    onChange={(el) => setDataNodeName(el.target.value)}
             />
         </div>

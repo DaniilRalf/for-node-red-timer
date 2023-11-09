@@ -23,7 +23,7 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
             </div>
 
             <Select
-                defaultValue={timerConf.repeat.typeRepeat}
+                defaultValue={timerConf.repeat.typeRepeat || RepeatEnum.None}
                 style={styleComponents.childBlock.timerRepeatBlock.select}
                 onChange={setDataRepeatType}
                 options={[
