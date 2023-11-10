@@ -28,12 +28,19 @@ export const styleComponents = {
                 [RepeatEnum.Interval]: {display: 'flex', justifyContent: 'start', alignItems: 'center'},
                 intervalInputValue: {width: '80px'},
                 intervalSelectType: {width: '120px'},
-                [RepeatEnum.IntervalInGap]: {display: 'flex', justifyContent: 'start', alignItems: 'center'},
+                [RepeatEnum.IntervalInGap]: {display: 'flex', justifyContent: 'start', alignItems: 'center', marginBottom: '20px'},
                 intervalInGapInputInterval: {width: '60px'},
                 intervalInGapInputGap: {width: '90px'},
-                intervalInGapSetDay: {width: '100%'},
             }
-        }
+        },
+
+        dayOfWeek: {
+            main: {width: '100%', display: 'flex'},
+            title: {marginRight: '15px'},
+            checkboxList: {display: 'flex'},
+            checkboxItem: {display: 'flex', flexDirection: 'column' as 'column', marginRight: '18px'},
+            checkboxElement: {transform: 'scale(1.3)'}
+        },
     }
 }
 /** styles for ANTD library */

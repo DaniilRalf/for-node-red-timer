@@ -42,3 +42,7 @@ export type PropsNodeNameType = {
 }
 export type PropsDelayType = PropsNodeNameType
 export type PropsRepeatType = PropsNodeNameType
+export type PropsDayOfWeek = {
+    timerConf: TimerConfInterface,
+    setDataDayOfWeek: any
+}

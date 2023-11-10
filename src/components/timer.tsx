@@ -32,7 +32,7 @@ const mockData: TimerConfInterface = {
             intervalInGap: {
                 intervalValue: 1,
                 gapValue: ['00:00:00', '01:00:00'],
-                daysValue: [0, 1, 2]
+                daysValue: [0, 1, 2, 3, 4, 5, 6]
             }
         }
     }

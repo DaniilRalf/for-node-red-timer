@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { styleComponents } from "../assets/styles";
 import { RedoOutlined } from "@ant-design/icons";
-import { PropsRepeatType, RepeatEnum, RepeatIntervalTypeValueEnum } from "../assets/types";
+import {
+    PropsDayOfWeek,
+    PropsDelayType,
+    PropsRepeatType,
+    RepeatEnum,
+    RepeatIntervalTypeValueEnum
+} from "../assets/types";
 import { DatePicker, Input, Select } from "antd"
 import dayjs, { Dayjs } from "dayjs";
+import DayOfWeek from "./day-of-week";
 
 const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
 
@@ -42,11 +49,14 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
         newTimerConf.repeat.dataRepeat.intervalInGap.gapValue[index] = `${data?.hour()}:00:00`
         setTimerConf(newTimerConf)
     }
+    const setDataDayOfWeek = (data: number[]): void => {
+        console.log(data)
+    }
     const disabledTime = (): Record<string, () => number[]> => {
         return {
             disabledHours: () => {
                 const hours: number[] = []
-                for (let i = 0; i < 24; i++) {
+                for (let i: number = 0; i < 24; i++) {
                     if (i < (dayjs(timerConf.repeat.dataRepeat.intervalInGap.gapValue[0]).hour() + 1)) {
                         hours.push(i)
                     }
@@ -57,6 +67,9 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
             disabledSeconds: () => [],
         }
     }
+    const propsDayOfWeek = useMemo<PropsDayOfWeek>(() => (
+        {timerConf, setDataDayOfWeek}
+    ), [timerConf])
     /** INTERVAL IN GAP=============================================================== */
 
 
@@ -143,9 +156,7 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
                             />
                         </div>
 
-                        <div style={styleComponents.childBlock.timerRepeatBlock.active.intervalInGapSetDay}>
-
-                        </div>
+                        <DayOfWeek {...propsDayOfWeek}/>
                     </>
                 }
 
