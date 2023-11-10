@@ -7,14 +7,32 @@ export interface TimerConfInterface {
     },
     repeat: {
         typeRepeat: RepeatEnum
+        dataRepeat: {
+            [RepeatEnum.Interval]: {
+                value: number,
+                typeValue: RepeatIntervalTypeValueEnum
+            },
+            [RepeatEnum.IntervalInGap]: {
+                intervalValue: number,
+                gapValue: [string, string],
+                daysValue: number[]
+            },
+            [RepeatEnum.ConcreteTime]?: any,
+        }
     }
 }
 
 export enum RepeatEnum {
     None = 'none',
     Interval = 'interval',
-    IntervalInGap = 'interval_in_gap',
-    ConcreteTime = 'concrete_time',
+    IntervalInGap = 'intervalInGap',
+    ConcreteTime = 'concreteTime',
+}
+
+export enum RepeatIntervalTypeValueEnum {
+    Sec = 'sec',
+    Min = 'min',
+    Hour = 'hour',
 }
 
 /** PROPS INTERFACE============================== */

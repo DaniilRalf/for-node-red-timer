@@ -1,8 +1,14 @@
-import React, {useEffect, useMemo, useState} from 'react'
-import {Collapse} from "antd"
-import {styleAntdCustom, styleComponents} from "./assets/styles";
+import React, { useEffect, useMemo, useState } from 'react'
+import { Collapse } from "antd"
+import { styleAntdCustom, styleComponents } from "./assets/styles";
 import NameSetting from "./components/name-setting";
-import {PropsDelayType, PropsNodeNameType, RepeatEnum, TimerConfInterface} from "./assets/types";
+import {
+    PropsDelayType,
+    PropsNodeNameType,
+    RepeatEnum,
+    RepeatIntervalTypeValueEnum,
+    TimerConfInterface
+} from "./assets/types";
 import DelaySetting from "./components/delay-setting";
 import RepeatSetting from "./components/repeat-setting";
 
@@ -17,7 +23,18 @@ const mockData: TimerConfInterface = {
         delayValue: null,
     },
     repeat: {
-        typeRepeat: RepeatEnum.None
+        typeRepeat: RepeatEnum.None,
+        dataRepeat: {
+            interval: {
+                value: 1,
+                typeValue: RepeatIntervalTypeValueEnum.Sec
+            },
+            intervalInGap: {
+                intervalValue: 1,
+                gapValue: ['00:00:00', '01:00:00'],
+                daysValue: [0, 1, 2]
+            }
+        }
     }
 }
 
@@ -65,7 +82,7 @@ const Timer = () => {
                 size="small"
                 expandIconPosition={'end'}
                 style={styleComponents.collapseBlock}
-                /** default open or close collapse */
+                //* default open or close collapse
                 activeKey={timerConf.isOpen ? ['conf-default'] : ['']}
                 onChange={setDataOnOpenCollapse}
                 items={[{

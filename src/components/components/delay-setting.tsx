@@ -41,7 +41,7 @@ const DelaySetting = ({timerConf, setTimerConf}: PropsDelayType) => {
                        type={'number'} min={0} step={1}
                        disabled={!timerConf.delay.isDelay}
                        value={timerConf.delay.delayValue ?? ''}
-                       onChange={(el) => setDataDelayValue(el.target.value)}
+                       onChange={(el: React.ChangeEvent<HTMLInputElement>) => setDataDelayValue(el.target.value)}
                 />
             </div>
 
