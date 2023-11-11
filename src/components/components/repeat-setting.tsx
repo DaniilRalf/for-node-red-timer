@@ -3,7 +3,6 @@ import { styleComponents } from "../assets/styles";
 import { RedoOutlined } from "@ant-design/icons";
 import {
     PropsDayOfWeek,
-    PropsDelayType,
     PropsRepeatType,
     RepeatEnum,
     RepeatIntervalTypeValueEnum
@@ -57,7 +56,7 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
             disabledHours: () => {
                 const hours: number[] = []
                 for (let i: number = 0; i < 24; i++) {
-                    if (i < (dayjs(timerConf.repeat.dataRepeat.intervalInGap.gapValue[0]).hour() + 1)) {
+                    if (i < (dayjs('2001-01-01 ' + timerConf.repeat.dataRepeat.intervalInGap.gapValue[0]).hour() + 1)) {
                         hours.push(i)
                     }
                 }
