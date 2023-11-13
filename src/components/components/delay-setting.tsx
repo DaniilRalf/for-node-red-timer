@@ -5,6 +5,7 @@ import {Checkbox, Input} from "antd";
 import {PropsDelayType} from "../assets/types";
 import {CheckboxChangeEvent} from "antd/es/checkbox";
 
+
 const DelaySetting = ({timerConf, setTimerConf}: PropsDelayType) => {
 
     /** set data DELAY VALUE */
@@ -20,7 +21,6 @@ const DelaySetting = ({timerConf, setTimerConf}: PropsDelayType) => {
         newTimerConf.delay.isDelay = data.target.checked
         setTimerConf(newTimerConf)
     }
-
 
     return (
         <div style={styleComponents.childBlock.timerDelayBlock.main}>

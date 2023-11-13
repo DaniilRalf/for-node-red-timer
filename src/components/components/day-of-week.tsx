@@ -3,7 +3,6 @@ import { styleComponents } from "../assets/styles";
 import { Checkbox } from "antd";
 import { PropsDayOfWeek } from "../assets/types";
 
-
 const dayOfWeek: {day: string, index: number}[] = [
     // TODO: add translate
     {day: 'пн', index: 0},
@@ -14,6 +13,7 @@ const dayOfWeek: {day: string, index: number}[] = [
     {day: 'сб', index: 5},
     {day: 'вс', index: 6},
 ]
+
 
 //TODO: передавать не конфиг целиком а только масив индексов дней
 const DayOfWeek = ({indexList, setDataDayOfWeek}: PropsDayOfWeek) => {

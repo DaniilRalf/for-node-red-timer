@@ -14,7 +14,6 @@ const NameSetting = ({timerConf, setTimerConf}: PropsNodeNameType) => {
         setTimerConf(newTimerConf)
     }
 
-
     return (
         <div style={styleComponents.childBlock.nameBlock.main}>
             <div style={styleComponents.childBlock.nameBlock.title}>

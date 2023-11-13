@@ -42,7 +42,7 @@ const mockData: TimerConfInterface = {
     }
 }
 
-/** timer-delay component */
+
 const Timer = () => {
 
     const [timerConf, setTimerConf] = useState<TimerConfInterface>({} as TimerConfInterface)
@@ -76,9 +76,6 @@ const Timer = () => {
     const propsRepeatSetting = useMemo<PropsDelayType>(() => (
         {timerConf, setTimerConf}
     ), [timerConf])
-
-
-
 
     return (
         <div>

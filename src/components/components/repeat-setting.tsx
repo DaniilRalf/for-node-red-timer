@@ -6,6 +6,7 @@ import { DatePicker, Input, Select } from "antd"
 import dayjs, { Dayjs } from "dayjs";
 import DayOfWeek from "./day-of-week";
 
+
 const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
 
     /** set data select REPEAT TYPE */
@@ -84,7 +85,6 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
         {indexList: timerConf.repeat.dataRepeat[RepeatEnum.ConcreteTime].daysValue, setDataDayOfWeek: setDataDayOfWeekConcreteTime}
     ), [timerConf])
     /** CONCRETE TIME================================================================= */
-
 
     return (
         <>
