@@ -17,7 +17,10 @@ export interface TimerConfInterface {
                 gapValue: [string, string],
                 daysValue: number[]
             },
-            [RepeatEnum.ConcreteTime]?: any,
+            [RepeatEnum.ConcreteTime]: {
+                concreteTimeValue: string,
+                daysValue: number[]
+            }
         }
     }
 }
@@ -43,6 +46,6 @@ export type PropsNodeNameType = {
 export type PropsDelayType = PropsNodeNameType
 export type PropsRepeatType = PropsNodeNameType
 export type PropsDayOfWeek = {
-    timerConf: TimerConfInterface,
+    indexList: number[],
     setDataDayOfWeek: any
 }

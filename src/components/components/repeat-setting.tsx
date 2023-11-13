@@ -1,12 +1,7 @@
 import React, { useMemo } from 'react';
 import { styleComponents } from "../assets/styles";
 import { RedoOutlined } from "@ant-design/icons";
-import {
-    PropsDayOfWeek,
-    PropsRepeatType,
-    RepeatEnum,
-    RepeatIntervalTypeValueEnum
-} from "../assets/types";
+import { PropsDayOfWeek, PropsRepeatType, RepeatEnum, RepeatIntervalTypeValueEnum } from "../assets/types";
 import { DatePicker, Input, Select } from "antd"
 import dayjs, { Dayjs } from "dayjs";
 import DayOfWeek from "./day-of-week";
@@ -48,7 +43,7 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
         newTimerConf.repeat.dataRepeat.intervalInGap.gapValue[index] = `${data?.hour()}:00:00`
         setTimerConf(newTimerConf)
     }
-    const setDataDayOfWeek = (data: number[]): void => {
+    const setDataDayOfWeekIntInGap = (data: number[]): void => {
         const newTimerConf = JSON.parse(JSON.stringify(timerConf))
         newTimerConf.repeat.dataRepeat.intervalInGap.daysValue = data
         setTimerConf(newTimerConf)
@@ -68,10 +63,27 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
             disabledSeconds: () => [],
         }
     }
-    const propsDayOfWeek = useMemo<PropsDayOfWeek>(() => (
-        {timerConf, setDataDayOfWeek}
+    const propsDayOfWeekIntInGap = useMemo<PropsDayOfWeek>(() => (
+        {indexList: timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].daysValue || [], setDataDayOfWeek: setDataDayOfWeekIntInGap}
     ), [timerConf])
     /** INTERVAL IN GAP=============================================================== */
+
+    /** CONCRETE TIME================================================================= */
+    /** set data input REPEAT VALUE GAP */
+    const setDataRepeatConcreteTimeValue = (data: Dayjs | null): void => {
+        const newTimerConf = JSON.parse(JSON.stringify(timerConf))
+        newTimerConf.repeat.dataRepeat.concreteTime.concreteTimeValue = `${data?.hour()}:${data?.minute()}:00`
+        setTimerConf(newTimerConf)
+    }
+    const setDataDayOfWeekConcreteTime = (data: number[]): void => {
+        const newTimerConf = JSON.parse(JSON.stringify(timerConf))
+        newTimerConf.repeat.dataRepeat.concreteTime.daysValue = data
+        setTimerConf(newTimerConf)
+    }
+    const propsDayOfWeekConcreteTime = useMemo<PropsDayOfWeek>(() => (
+        {indexList: timerConf.repeat.dataRepeat[RepeatEnum.ConcreteTime].daysValue, setDataDayOfWeek: setDataDayOfWeekConcreteTime}
+    ), [timerConf])
+    /** CONCRETE TIME================================================================= */
 
 
     return (
@@ -157,12 +169,29 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
                             />
                         </div>
 
-                        <DayOfWeek {...propsDayOfWeek}/>
+                        <DayOfWeek {...propsDayOfWeekIntInGap}/>
                     </>
                 }
 
+                {/** CONCRETE TIME */}
+                {timerConf.repeat.typeRepeat === RepeatEnum.ConcreteTime &&
+                    <>
+                        <div>
+                            <div style={styleComponents.childBlock.timerRepeatBlock.active[RepeatEnum.ConcreteTime]}>
+                                {/* TODO: add translate */}
+                                <p>Повторять в</p>&nbsp;&nbsp;
+                                <DatePicker picker={'time'} format={'HH:mm'}
+                                            style={styleComponents.childBlock.timerRepeatBlock.active.concreteTimeInput}
+                                            //* указываем с датой, но используем только время, поскольку компонент принимает данные только такого вида
+                                            defaultValue={dayjs(`2000-01-01 ${timerConf.repeat.dataRepeat[RepeatEnum.ConcreteTime].concreteTimeValue}`)}
+                                            onChange={(value) => setDataRepeatConcreteTimeValue(value)}
+                                />
+                            </div>
 
-
+                            <DayOfWeek {...propsDayOfWeekConcreteTime}/>
+                        </div>
+                    </>
+                }
 
             </>
         </>

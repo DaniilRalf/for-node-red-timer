@@ -33,6 +33,10 @@ const mockData: TimerConfInterface = {
                 intervalValue: 1,
                 gapValue: ['00:00:00', '23:00:00'],
                 daysValue: [0, 1, 2, 3, 4, 5, 6]
+            },
+            concreteTime: {
+                concreteTimeValue: '00:00:00',
+                daysValue: [0, 1, 2, 3, 4, 5, 6]
             }
         }
     }
@@ -97,7 +101,6 @@ const Timer = () => {
                         </>
                 }]}
             />
-            {/*<div className="" onClick={() => console.log(timerConf)}>asdasd</div>*/}
             <style>{styleAntdCustom}</style>
         </div>
     )

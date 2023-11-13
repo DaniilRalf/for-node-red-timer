@@ -31,6 +31,8 @@ export const styleComponents = {
                 [RepeatEnum.IntervalInGap]: {display: 'flex', justifyContent: 'start', alignItems: 'center', marginBottom: '20px'},
                 intervalInGapInputInterval: {width: '60px'},
                 intervalInGapInputGap: {width: '90px'},
+                [RepeatEnum.ConcreteTime]: {display: 'flex', justifyContent: 'start', alignItems: 'center', marginBottom: '20px'},
+                concreteTimeInput: {width: '90px'},
             }
         },
 

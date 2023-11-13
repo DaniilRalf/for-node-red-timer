@@ -1,7 +1,7 @@
 import React from 'react';
 import { styleComponents } from "../assets/styles";
 import { Checkbox } from "antd";
-import { PropsDayOfWeek, RepeatEnum } from "../assets/types";
+import { PropsDayOfWeek } from "../assets/types";
 
 
 const dayOfWeek: {day: string, index: number}[] = [
@@ -15,16 +15,17 @@ const dayOfWeek: {day: string, index: number}[] = [
     {day: 'вс', index: 6},
 ]
 
-const DayOfWeek = ({timerConf, setDataDayOfWeek}: PropsDayOfWeek) => {
+//TODO: передавать не конфиг целиком а только масив индексов дней
+const DayOfWeek = ({indexList, setDataDayOfWeek}: PropsDayOfWeek) => {
 
+    /** generate indexes of day */
     const setIndexDay = (dayIndex: number): void => {
-        let newIndexDayList: number[] = timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].daysValue
-            ? [...timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].daysValue]
+        let newIndexDayList: number[] = indexList && indexList.length
+            ? [...indexList]
             : []
-        if (timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].daysValue
-            && timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].daysValue.includes(dayIndex)) {
-                newIndexDayList = newIndexDayList.filter((el: number) => el !== dayIndex)
-        } else if (!timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].daysValue.includes(dayIndex)) {
+        if (indexList && indexList.length && indexList.includes(dayIndex)) {
+                newIndexDayList = newIndexDayList.filter((el: number): boolean => el !== dayIndex)
+        } else if (indexList && indexList.length && !indexList.includes(dayIndex)) {
             newIndexDayList.push(dayIndex)
         }
         setDataDayOfWeek(newIndexDayList)
@@ -34,7 +35,7 @@ const DayOfWeek = ({timerConf, setDataDayOfWeek}: PropsDayOfWeek) => {
         return (
             <div key={itemDay.index} style={styleComponents.childBlock.dayOfWeek.checkboxItem}>
                 <Checkbox style={styleComponents.childBlock.dayOfWeek.checkboxElement}
-                          checked={timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].daysValue.includes(itemDay.index) ?? false}
+                          checked={indexList.includes(itemDay.index) ?? false}
                           onChange={() => setIndexDay(itemDay.index)}
                 /><p>{itemDay.day}</p>
             </div>
