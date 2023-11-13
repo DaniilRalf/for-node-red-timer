@@ -1,7 +1,7 @@
 import React from 'react';
 import { styleComponents } from "../assets/styles";
 import { Checkbox } from "antd";
-import { PropsDayOfWeek, PropsRepeatType } from "../assets/types";
+import { PropsDayOfWeek, RepeatEnum } from "../assets/types";
 
 
 const dayOfWeek: {day: string, index: number}[] = [
@@ -17,15 +17,25 @@ const dayOfWeek: {day: string, index: number}[] = [
 
 const DayOfWeek = ({timerConf, setDataDayOfWeek}: PropsDayOfWeek) => {
 
-
-
+    const setIndexDay = (dayIndex: number): void => {
+        let newIndexDayList: number[] = timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].daysValue
+            ? [...timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].daysValue]
+            : []
+        if (timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].daysValue
+            && timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].daysValue.includes(dayIndex)) {
+                newIndexDayList = newIndexDayList.filter((el: number) => el !== dayIndex)
+        } else if (!timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].daysValue.includes(dayIndex)) {
+            newIndexDayList.push(dayIndex)
+        }
+        setDataDayOfWeek(newIndexDayList)
+    }
 
     const constructItemCheckbox: JSX.Element[] = dayOfWeek.map((itemDay: {day: string, index: number}) => {
         return (
             <div key={itemDay.index} style={styleComponents.childBlock.dayOfWeek.checkboxItem}>
                 <Checkbox style={styleComponents.childBlock.dayOfWeek.checkboxElement}
-                          checked={true}
-                    // onChange={onChange}
+                          checked={timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].daysValue.includes(itemDay.index) ?? false}
+                          onChange={() => setIndexDay(itemDay.index)}
                 /><p>{itemDay.day}</p>
             </div>
         )

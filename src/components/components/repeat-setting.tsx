@@ -49,7 +49,9 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
         setTimerConf(newTimerConf)
     }
     const setDataDayOfWeek = (data: number[]): void => {
-        console.log(data)
+        const newTimerConf = JSON.parse(JSON.stringify(timerConf))
+        newTimerConf.repeat.dataRepeat.intervalInGap.daysValue = data
+        setTimerConf(newTimerConf)
     }
     const disabledTime = (): Record<string, () => number[]> => {
         return {
