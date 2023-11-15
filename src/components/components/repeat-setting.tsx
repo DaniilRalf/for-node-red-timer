@@ -4,7 +4,10 @@ import { RedoOutlined } from "@ant-design/icons";
 import { PropsDayOfWeek, PropsRepeatType, RepeatEnum, RepeatIntervalTypeValueEnum } from "../assets/types";
 import { DatePicker, Input, Select } from "antd"
 import dayjs, { Dayjs } from "dayjs";
+import utc from 'dayjs/plugin/utc'
 import DayOfWeek from "./day-of-week";
+
+dayjs.extend(utc)
 
 
 const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
@@ -41,7 +44,7 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
     /** set data input REPEAT VALUE GAP */
     const setDataRepeatIntervalInGapGp = (data: Dayjs | null, index: 0 | 1): void => {
         const newTimerConf = JSON.parse(JSON.stringify(timerConf))
-        newTimerConf.repeat.dataRepeat.intervalInGap.gapValue[index] = `${data?.hour()}:00:00`
+        newTimerConf.repeat.dataRepeat.intervalInGap.gapValue[index] = `${data?.utc().hour()}:00:00`
         setTimerConf(newTimerConf)
     }
     const setDataDayOfWeekIntInGap = (data: number[]): void => {
@@ -54,7 +57,7 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
             disabledHours: () => {
                 const hours: number[] = []
                 for (let i: number = 0; i < 24; i++) {
-                    if (i < (dayjs('2001-01-01 ' + timerConf.repeat.dataRepeat.intervalInGap.gapValue[0]).hour() + 1)) {
+                    if (i < (dayjs.utc('2000-01-01 ' + timerConf.repeat.dataRepeat.intervalInGap.gapValue[0]).local().hour() + 1)) {
                         hours.push(i)
                     }
                 }
@@ -73,7 +76,7 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
     /** set data input REPEAT VALUE GAP */
     const setDataRepeatConcreteTimeValue = (data: Dayjs | null): void => {
         const newTimerConf = JSON.parse(JSON.stringify(timerConf))
-        newTimerConf.repeat.dataRepeat.concreteTime.concreteTimeValue = `${data?.hour()}:${data?.minute()}:00`
+        newTimerConf.repeat.dataRepeat.concreteTime.concreteTimeValue = `${data?.utc().hour()}:${data?.utc().minute()}:00`
         setTimerConf(newTimerConf)
     }
     const setDataDayOfWeekConcreteTime = (data: number[]): void => {
@@ -155,7 +158,7 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
                             <DatePicker picker={'time'} format={'HH:00'}
                                         style={styleComponents.childBlock.timerRepeatBlock.active.intervalInGapInputGap}
                                         //* указываем с датой, но используем только время, поскольку компонент принимает данные только такого вида
-                                        defaultValue={dayjs(`2000-01-01 ${timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].gapValue[0]}`)}
+                                        defaultValue={dayjs.utc(`2000-01-01 ${timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].gapValue[0]}`).local()}
                                         onChange={(value) => setDataRepeatIntervalInGapGp(value, 0)}
                             />&nbsp;&nbsp;&nbsp;
                             {/* TODO: add translate */}
@@ -163,7 +166,7 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
                             <DatePicker picker={'time'} format={'HH:00'}
                                         style={styleComponents.childBlock.timerRepeatBlock.active.intervalInGapInputGap}
                                         //* указываем с датой, но используем только время, поскольку компонент принимает данные только такого вида
-                                        defaultValue={dayjs(`2000-01-01 ${timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].gapValue[1]}`)}
+                                        defaultValue={dayjs.utc(`2000-01-01 ${timerConf.repeat.dataRepeat[RepeatEnum.IntervalInGap].gapValue[1]}`).local()}
                                         onChange={(value) => setDataRepeatIntervalInGapGp(value, 1)}
                                         disabledTime={disabledTime}
                             />
@@ -183,7 +186,7 @@ const RepeatSetting = ({timerConf, setTimerConf}: PropsRepeatType) => {
                                 <DatePicker picker={'time'} format={'HH:mm'}
                                             style={styleComponents.childBlock.timerRepeatBlock.active.concreteTimeInput}
                                             //* указываем с датой, но используем только время, поскольку компонент принимает данные только такого вида
-                                            defaultValue={dayjs(`2000-01-01 ${timerConf.repeat.dataRepeat[RepeatEnum.ConcreteTime].concreteTimeValue}`)}
+                                            defaultValue={dayjs.utc(`2000-01-01 ${timerConf.repeat.dataRepeat[RepeatEnum.ConcreteTime].concreteTimeValue}`).local()}
                                             onChange={(value) => setDataRepeatConcreteTimeValue(value)}
                                 />
                             </div>

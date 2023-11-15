@@ -59,6 +59,7 @@ const Timer = () => {
 
 
         /** =========================================================== */
+        console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
         // setInterval((): void => {
         //     const nowDay: number = new Date().getDay()
         //     const actualTime = new Date('2000-01-01 ' + new Date().getHours() + ':' + new Date().getMinutes() + ':00')
