@@ -23,7 +23,7 @@ const mockData: TimerConfInterface = {
         delayValue: null,
     },
     repeat: {
-        typeRepeat: RepeatEnum.None,
+        typeRepeat: RepeatEnum.IntervalInGap,
         dataRepeat: {
             interval: {
                 value: 1,
@@ -31,12 +31,12 @@ const mockData: TimerConfInterface = {
             },
             intervalInGap: {
                 intervalValue: 1,
-                gapValue: ['00:00:00', '23:00:00'],
-                daysValue: [0, 1, 2, 3, 4, 5, 6]
+                gapValue: ['11:00:00', '12:00:00'],
+                daysValue: [1, 2, 3, 4, 5, 6, 7]
             },
             concreteTime: {
                 concreteTimeValue: '00:00:00',
-                daysValue: [0, 1, 2, 3, 4, 5, 6]
+                daysValue: [1, 2, 3, 4, 5, 6, 7]
             }
         }
     }
@@ -56,6 +56,31 @@ const Timer = () => {
         // TODO: засунуть в переменную timerConf данные из пропсов
         mockData.isOpen = IS_OPEN_COLLAPSE
         setTimerConf(mockData)
+
+
+        /** =========================================================== */
+        // setInterval((): void => {
+        //     const nowDay: number = new Date().getDay()
+        //     const actualTime = new Date('2000-01-01 ' + new Date().getHours() + ':' + new Date().getMinutes() + ':00')
+        //     const confTimeStart = new Date('2000-01-01 ' + mockData.repeat.dataRepeat[RepeatEnum.IntervalInGap].gapValue[0] + ':00')
+        //     const confTimeEnd = new Date('2000-01-01 ' + mockData.repeat.dataRepeat[RepeatEnum.IntervalInGap].gapValue[1] + ':00')
+        //     if (mockData.repeat.dataRepeat[RepeatEnum.IntervalInGap].daysValue.includes(nowDay)
+        //         && ((confTimeStart <= actualTime) &&  (actualTime <= confTimeEnd))) {
+        //         console.log(actualTime)
+        //     }
+        //     // console.log(actualTime)
+        // }, mockData.repeat.dataRepeat[RepeatEnum.IntervalInGap].intervalValue * 1000)
+
+        // setInterval((): void => {
+        //     const nowDate = new Date()
+        //     const nowDay: number = nowDate.getDay()
+        //     const nowTime = new Date(`2000-01-01 ${nowDate.getHours()}:${nowDate.getMinutes()}:00`)
+        //     const confTime = new Date(`2000-01-01 ${mockData.repeat.dataRepeat[RepeatEnum.ConcreteTime].concreteTimeValue}`)
+        //     if (nowTime === confTime && mockData.repeat.dataRepeat[RepeatEnum.ConcreteTime].daysValue.includes(nowDay)) {
+        //
+        //     }
+        // }, 1000)
+        /** =========================================================== */
     }
 
     /** set data when open collapse IS_OPEN */

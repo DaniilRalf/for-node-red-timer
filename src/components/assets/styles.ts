@@ -22,7 +22,7 @@ export const styleComponents = {
             main: {display: 'flex', justifyContent: 'space-between', marginBottom: '20px'},
             title: {display: 'flex', alignItems: 'center'},
             icon: {marginRight: '5px'},
-            select: {width: '250px'},
+            select: {width: '300px'},
 
             active: {
                 [RepeatEnum.Interval]: {display: 'flex', justifyContent: 'start', alignItems: 'center'},
@@ -37,12 +37,19 @@ export const styleComponents = {
         },
 
         dayOfWeek: {
-            main: {width: '100%', display: 'flex'},
+            main: {
+                width: '100%',
+                marginTop: '30px',
+                marginBottom: '15px',
+
+                display: 'flex',
+                justifyContent: 'space-between'
+            },
             title: {marginRight: '15px'},
-            checkboxList: {display: 'flex'},
-            checkboxItem: {display: 'flex', flexDirection: 'column' as 'column', marginRight: '18px'},
+            checkboxList: {display: 'flex', marginRight: '5px'},
+            checkboxItem: {display: 'flex', flexDirection: 'column' as 'column', marginLeft: '30px'},
             checkboxElement: {transform: 'scale(1.3)'}
-        },
+        }
     }
 }
 /** styles for ANTD library */

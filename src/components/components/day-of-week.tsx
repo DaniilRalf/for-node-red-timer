@@ -5,13 +5,13 @@ import { PropsDayOfWeek } from "../assets/types";
 
 const dayOfWeek: {day: string, index: number}[] = [
     // TODO: add translate
-    {day: 'пн', index: 0},
-    {day: 'вт', index: 1},
-    {day: 'ср', index: 2},
-    {day: 'чт', index: 3},
-    {day: 'пт', index: 4},
-    {day: 'сб', index: 5},
-    {day: 'вс', index: 6},
+    {day: 'пн', index: 1},
+    {day: 'вт', index: 2},
+    {day: 'ср', index: 3},
+    {day: 'чт', index: 4},
+    {day: 'пт', index: 5},
+    {day: 'сб', index: 6},
+    {day: 'вс', index: 7},
 ]
 
 
